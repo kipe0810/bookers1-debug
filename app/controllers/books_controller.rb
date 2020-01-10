@@ -23,8 +23,10 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     if @book.save
-      redirect_to @book, notice: 'Book was successfully created.'
+      flash[:notice] = 'Book was successfully created.'
+      redirect_to @book
     else
+      @books = Book.all
       render :index
     end
   end
@@ -41,7 +43,6 @@ class BooksController < ApplicationController
       render :edit
     end
   end
-  # updateできない
 
 
   # DELETE /books/1
